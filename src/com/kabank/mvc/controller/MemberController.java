@@ -16,13 +16,12 @@ public class MemberController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		System.out.println("서블릿 내부===================================================");
-		response.getWriter().append("Hello at: ").append(request.getContextPath());
-		RequestDispatcher rd= request.getRequestDispatcher("WEB-INF/view/user/login.jsp");
+		/*response.getWriter().append("<h1>에휴</h1>").append(request.getContextPath());*/
+		RequestDispatcher rd= request.getRequestDispatcher("/WEB-INF/view/user/login.jsp");
 		rd.forward(request, response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 	}
-
 }

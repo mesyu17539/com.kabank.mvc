@@ -5,11 +5,11 @@
 	id="WebApp_ID" version="3.1">
 	<display-name>com.kabank.mvc</display-name>
 	<servlet>
-		<servlet-name>MemberServlet</servlet-name>
+		<servlet-name>memberServlet</servlet-name>
 		<servlet-class>com.kabank.mvc.controller.MemberController</servlet-class>
 	</servlet>
 	<servlet-mapping>
-		<servlet-name>MemberServlet</servlet-name>
+		<servlet-name>memberServlet</servlet-name>
 		<url-pattern>*.do</url-pattern>
 	</servlet-mapping>
 	<servlet-mapping>
