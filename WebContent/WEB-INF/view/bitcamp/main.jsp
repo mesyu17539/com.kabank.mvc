@@ -2,8 +2,8 @@
 <!doctype html>
 <html lang="en">
 <%@ include file="../common/head.jsp" %>
-<link rel="stylesheet" href="../../css/common.css" />
-<link rel="stylesheet" href="../../css/bitc.css" />
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/common.css" />
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/bitc.css" />
 <body>
 <%@ include file="../common/header.jsp" %>
 <%@ include file="../common/nav.jsp" %>
@@ -61,14 +61,6 @@
 	</tr>
 	<tr>
 		<th>결과</th>
-		<%for(int i=1;i<=5;i++){
-			%>
-		<th>
-			<%if(request.getParameter(String.format("%d",i))!=null){%>
-				<%=request.getParameter(String.format("%d",i))%>
-			<%}%> 
-		</th>
-		<%}%>
 		<th><button id="bitcam_btn">출력</button></th>
 	</tr>
 </table>
@@ -78,5 +70,4 @@
 </section>
 <%@ include file="../common/foorter.jsp" %>
 </body>
-<script src="../../js/bitcamp/bitcam.js" ></script>
 </html>

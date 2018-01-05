@@ -5,7 +5,7 @@
 	<meta charset="UTF-8" />
 	<title>관리자 화면</title>
 </head>
-<link rel="stylesheet" href="../../css/admin_add_member.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/admin_add_member.css">
 <body style="text-align: center;">
 <header>
 			<h1>관리자 페이지</h1>
@@ -22,7 +22,7 @@
 				</ul>
 			</aside>
 			<section id="admin_section">
-			<form id="register_form" action="member_register.jsp">
+			<form id="register_form" action="${pageContext.request.contextPath}/admin/member_list.do">
 				<table id="admin_table">
 					<tr>
 						<th>ID</th>
@@ -57,5 +57,10 @@
 </div>
 <%@ include file="../common/foorter.jsp" %>
 </body>
-<script src="../../js/admin/member_register_form.js" ></script>
+<script>
+document.querySelector('#add_member_btn').addEventListener("click",function(){
+	alert("추가 버튼 클릭");
+	document.querySelector('#register_form').submit();
+},false);
+</script>
 </html>

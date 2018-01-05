@@ -2,10 +2,9 @@
 <!doctype html>
 <html lang="en">
 <%@ include file="../common/head.jsp" %>
-<link rel="stylesheet" href="../../css/member.css" />
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/member.css" />
 <body>
 <%@ include file="../common/header.jsp" %>
-<%@ include file="../common/nav.jsp" %>
 <section>
 <article>
 	<header id="join_header">
@@ -14,7 +13,7 @@
 </article>
 <article>
 	<div id="wrapper">
-		<form id="join_form" action="join.jsp">
+		<form id="join_form" action="${pageContext.request.contextPath}/user/login.do">
 		<table id="join_table">	
 			<tr>
 				<td>ID : </td>
@@ -72,6 +71,17 @@
 </section>
 <%@ include file="../common/foorter.jsp" %>
 </body>
-<link rel="stylesheet" href="../../css/member.css">
-<script src="../../js/user/join.js" ></script>
+<link rel="stylesheet" href="<%=application.getContextPath() %>/resources/css/member.css">
+<script>
+document.querySelector('#join_conform_btn').addEventListener("click",
+		function () {
+	alert("가입하러간다~");
+	document.querySelector('#join_form').submit();
+},false);
+document.querySelector('#check_dupl').addEventListener("click",
+		function () {
+	alert("첵킹!");
+	document.querySelector('#join_form').submit();
+},false);
+</script>
 </html>

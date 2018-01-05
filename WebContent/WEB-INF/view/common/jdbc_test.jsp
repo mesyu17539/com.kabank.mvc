@@ -9,23 +9,7 @@
 	<title>JDBC</title>
 </head>
 <body>
-<%
-	try{
-		Class.forName("oracle.jdbc.driver.OracleDriver"); //재귀호출 내가 나를 호출함.
-		Connection conn=DriverManager.
-				getConnection("jdbc:oracle:thin:@localhost:1521:xe", //getConnection 연결하다
-						"bitcamp","bitcamp");
-		Statement stat=conn.createStatement();
-		String sql="SELECT * FROM tab";/* "SELECT COUNT(*) AS count FROM tab"; //COUNT(*) 전체 수 */
-		ResultSet rs=stat.executeQuery(sql); //executeQuery sql 실행
-		String count="?";
-		while(rs.next()){
-			count = rs.getString("count"); //getString 결과전송
-		}
-			%> 테이블 갯수는 <%= count%> 입니다 <%
-	}catch(Exception e){
-		e.printStackTrace();
-	}
-%>	
+	JDBC TEST
+	DB에 있는 테이블 수는 ${requestScope.count}개 입니다<!-- requestScope 내에 count라는 id에 value를 지정해 놓았으니 가져가라 -->
 </body>
 </html>

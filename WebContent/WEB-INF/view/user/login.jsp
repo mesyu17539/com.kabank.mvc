@@ -4,10 +4,9 @@
 <head>
 	<meta charset="UTF-8" />
 	<title>예제종목</title>
-	<link rel="shortcut icon" href="../../../resources/png/favicon.ico">
-	<link rel="stylesheet" href="../../../resources/css/common.css">
-	<link rel="stylesheet" href="../../../resources/css/index.css">
-	<script src="../js/index.js"></script>
+	<link rel="shortcut icon" href="${pageContext.request.contextPath}/resources/png/favicon.ico">
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/common.css">
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/index.css" /><!-- URL 링크 잡기. -->
 </head>
 <body>
 <div id="wrapper">
@@ -22,14 +21,14 @@
 			</tr>
 			<tr>
 				<td colspan="5">
-				<form action="burgerking/main.jsp">
+				<form id="auth_form" action="${pageContext.request.contextPath}/user/auth.do">
 					<table id="index_login_box">
 						<tr>
-							<td><input id="index_input_id" type="text" placeholder="id" tabindex="1"/></td>
-							<td rowspan="2"><input id="index_input_btn" type="submit" value="로그인" tabindex="3"/></td>
+							<td><input id="index_input_id" name="id" type="text" placeholder="id" tabindex="1"/></td>
+							<td rowspan="2"><button id="index_input_btn">로그인</button></td>
 						</tr>
 						<tr>
-							<td><input id="index_input_password" type="password" placeholder="pass" tabindex="2"/></td>
+							<td><input id="index_input_password" name="pass" type="password" placeholder="pass" tabindex="2"/></td>
 						</tr>
 					</table>
 				</form>
@@ -39,6 +38,9 @@
 				<a id="go_admin_link" href="#">
 					관리자
 				</a>
+				<a id="go_JDBC_link" href="#">
+					JDBCTest
+				</a>
 				</td>
 			</tr>
 		</table>
@@ -47,4 +49,22 @@
 </div>
 <%@ include file="../common/foorter.jsp" %>
 </body>
+<script>
+document.querySelector('#go_join_link').addEventListener("click",function () {
+	alert("짜란");
+	location.href="${pageContext.request.contextPath}/user/join_form.do"
+},false);
+document.querySelector('#go_JDBC_link').addEventListener("click",function(){
+	alert("JDBC");
+	location.href="${pageContext.request.contextPath}/common/jdbc_test.do"
+},false);
+document.querySelector('#go_admin_link').addEventListener("click",function(){
+	alert("관리자");
+	location.href="${pageContext.request.contextPath}/admin/main.do"
+},false);
+document.querySelector('#index_input_btn').addEventListener("click",function(){
+	alert("로그인");
+	document.querySelector('#auth_form').submit();
+},false);
+</script>
 </html>

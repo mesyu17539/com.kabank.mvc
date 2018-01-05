@@ -7,7 +7,7 @@
 	<meta charset="UTF-8" />
 	<title>관리자 화면</title>
 </head>
-<link rel="stylesheet" href="../../css/admin_member.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/admin_member.css">
 <body style="text-align: center;">
 <header>
 			<h1>관리자 페이지</h1>
@@ -49,5 +49,4 @@
 </div>
 <%@ include file="../common/foorter.jsp" %>
 </body>
-<script src="../../js/admin/admins_member.js" ></script>
 </html>

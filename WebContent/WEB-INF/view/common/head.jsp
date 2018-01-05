@@ -3,5 +3,4 @@
 <meta charset="UTF-8" />
 <title>예제종목</title>
 <link rel="shortcut icon" href="../../png/favicon.ico">
-<link rel="stylesheet" href="../../css/common.css">
 </head>
