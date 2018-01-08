@@ -28,8 +28,8 @@
 							<form id="admin_table" action="${pageContext.request.contextPath}/admin/create_table.do">
 								생성할 테이블 이름 : 
 								<select name="admin_tname">
-									<option value="MEMBER">MEMBER</option>
-									<option value="ATTEND">ATTEND</option>
+									<option value="MEMBER">회원</option>
+									<option value="ATTEND">출석</option>
 								</select>
 								<button id="admin_button">테이블 생성</button>
 							</form>

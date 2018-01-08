@@ -13,12 +13,12 @@
 </article>
 <article>
 	<div id="wrapper">
-		<form id="join_form" action="${pageContext.request.contextPath}/user/login.do">
+		<form id="join_form" action="${pageContext.request.contextPath}/user/memberjoin.do">
 		<table id="join_table">	
 			<tr>
 				<td>ID : </td>
 				<td>
-					<input id="join_id" name="join_id" type="text" name="id"/>
+					<input id="join_id" type="text" name="id"/>
 					<button id="check_dupl" name="check_dupl" >중복확인</button>
 				</td>
 			</tr>
