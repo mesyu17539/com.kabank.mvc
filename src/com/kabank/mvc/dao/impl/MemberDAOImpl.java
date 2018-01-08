@@ -60,8 +60,8 @@ public class MemberDAOImpl implements MemberDAO{
 							Enums.DML.INTO,
 							Enums.TABLE.MEMBER,
 							bean.getId(),
-							bean.getName(),
 							bean.getPass(),
+							bean.getName(),
 							bean.getSsn(),
 							bean.getPhone(),
 							bean.getEmail(),
@@ -69,10 +69,43 @@ public class MemberDAOImpl implements MemberDAO{
 							bean.getAddr()
 							);
 			System.out.println(a);
-			//stat.executeQuery(a);
+			stat.executeQuery(a);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+	}
+
+	public MemberBean selectMemberById(MemberBean bean) {
+		System.out.println("DAOIMPL 진입");
+		MemberBean bea=null;
+		String sql="SELECT * FROM MEMBER WHERE id=? AND pass=?";
+		try {
+			Class.forName(DBMS.ORACLE_DRIVER);
+			Connection conn=DriverManager.getConnection(
+					DBMS.ORACLE_CONECTIONURL,
+					DBMS.ORACLE_USERNAME,
+					DBMS.ORACLE_PASSWORD);
+			PreparedStatement pstat=conn.prepareStatement(sql);
+			pstat.setString(1, bean.getId());
+			pstat.setString(2, bean.getPass());
+			ResultSet rs=pstat.executeQuery();
+			while(rs.next()) {
+				bea=new MemberBean();
+				System.out.println("id 받은 값 : "+rs.getString("id"));
+				System.out.println("pass 받은 값 : "+rs.getString("pass"));
+				bea.setId(rs.getString("id"));
+				bea.setPass(rs.getString("pass"));
+				bea.setName(rs.getString("name"));
+				bea.setSsn(rs.getString("ssn"));
+				bea.setPhone(rs.getString("phone"));
+				bea.setEmail(rs.getString("email"));
+				bea.setProfile(rs.getString("profile"));
+				bea.setAddr(rs.getString("addr"));
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return bea;
 	}
 	
 }

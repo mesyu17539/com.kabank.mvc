@@ -8,6 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.apache.catalina.tribes.membership.MemberImpl;
 
@@ -29,11 +30,21 @@ public class MemberController extends HttpServlet {
 		String path=request.getServletPath()
 				.split("/")[2]
 						.split(Path.DOT)[0]; 
+		MemberBean bean;
+		MemberService service=new MemberServiceImpl();
+		HttpSession session=request.getSession();
 		switch(path) {
 		case "auth":
-			if(new MemberServiceImpl().login(request.getParameter("id"),request.getParameter("pass"))) {
+			bean=new MemberBean();
+			bean.setId(request.getParameter("id"));
+			bean.setPass(request.getParameter("pass"));
+			MemberBean member=service.findById(bean);
+/*			MemberBean member=new MemberServiceImpl().findById(bean);
+*/			if(member!=null) {
 				dir="bitcamp";
 				path="main";
+				/*request.setAttribute("user", member);//일회용*/
+				session.setAttribute("user", member);//브라우져
 			}else {
 				path="login";
 			}
@@ -42,7 +53,7 @@ public class MemberController extends HttpServlet {
 			System.out.println("컨트롤진입");
 			dir="user";
 			path="login";
-			MemberBean bean=new MemberBean();
+			bean=new MemberBean();
 			bean.setAddr(request.getParameter("addr"));
 			bean.setSsn(request.getParameter("ssn1").concat(request.getParameter("ssn2")));
 			bean.setEmail(request.getParameter("email"));
@@ -53,7 +64,7 @@ public class MemberController extends HttpServlet {
 			bean.setEmail(request.getParameter("email").concat(request.getParameter("url")));
 			bean.setAddr(request.getParameter("addr"));
 			System.out.println("id : "+request.getParameter("id"));
-			new MemberServiceImpl().join(bean);
+			service.join(bean);
 			break;
 		case "join_form":
 			break;

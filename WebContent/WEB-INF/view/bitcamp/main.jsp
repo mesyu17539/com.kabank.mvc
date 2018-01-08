@@ -13,6 +13,35 @@
 <section id="bitc_section">
 <div id="wrapper">
 <form action="result.jsp" id="bit_form">
+<table id="bitca_table">
+	<tr>
+		<th rowspan="4" class="shema"><img src="${pageContext.request.contextPath}/resources/png/profile.png" alt="" /></th>
+		<th class="shema">ID</th>
+		<td>${sessionScope.user.id}</td>
+		<th class="shema">생년월일</th>
+		<td>${sessionScope.user.id}</td>
+	</tr>
+	<tr>
+		<th class="shema">비밀번호</th>
+		<td>${sessionScope.user.pass}</td>
+		<th class="shema">전화번호</th>
+		<td>${sessionScope.user.id}</td>
+	</tr>
+	<tr>
+		<th class="shema">이름</th>
+		<td>${sessionScope.user.id}</td>
+		<th class="shema">이메일</th>
+		<td>${sessionScope.user.id}</td>
+	</tr>
+	<tr>
+		<th class="shema">성별</th>
+		<td>${sessionScope.user.id}</td>
+		<th class="shema">주소</th>
+		<td>${sessionScope.user.id}</td>
+	</tr>
+</table>
+<br />
+<br />
 <table id="bitc_table">
 	<tr>
 		<th></th>
@@ -21,7 +50,6 @@
 		<th>수</th>
 		<th>목</th>
 		<th>금</th>
-		<th></th>
 	</tr>
 	<tr>
 		<th>결석</th>
@@ -30,7 +58,6 @@
 		<td><input name="3" type="radio" checked="checked" value="결석"/></td>
 		<td><input name="4" type="radio" checked="checked" value="결석"/></td>
 		<td><input name="5" type="radio" checked="checked" value="결석"/></td>
-		<td></td>
 	</tr>
 	<tr>
 		<th>지각</th>
@@ -39,7 +66,6 @@
 		<td><input name="3" type="radio" value="지각"/></td>
 		<td><input name="4" type="radio" value="지각"/></td>
 		<td><input name="5" type="radio" value="지각"/></td>
-		<td></td>
 	</tr>
 	<tr>
 		<th>조퇴</th>
@@ -48,7 +74,6 @@
 		<td><input name="3" type="radio" value="조퇴"/></td>
 		<td><input name="4" type="radio" value="조퇴"/></td>
 		<td><input name="5" type="radio" value="조퇴"/></td>
-		<td></td>
 	</tr>
 	<tr>
 		<th>출석</th>
@@ -57,17 +82,16 @@
 		<td><input name="3" type="radio" value="출석"/></td>
 		<td><input name="4" type="radio" value="출석"/></td>
 		<td><input name="5" type="radio" value="출석"/></td>
-		<td></td>
 	</tr>
 	<tr>
 		<th>결과</th>
 		<th><button id="bitcam_btn">출력</button></th>
+		<th colspan="4"></th>
 	</tr>
 </table>
 <input type="hidden" id="id" value="tkddn"/>
 </form>
 </div>
 </section>
-<%@ include file="../common/foorter.jsp" %>
 </body>
 </html>
