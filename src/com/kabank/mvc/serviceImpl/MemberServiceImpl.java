@@ -20,15 +20,19 @@ public class MemberServiceImpl implements MemberService{
 		System.out.println("ServiceIMPL 진입");
 		List<MemberBean> mbean=dao.selectMemberById(bean);
 		MemberBean bea=null;
-		boolean bool=false;
 		System.out.println("비교문");
-		for(int i=0;i<mbean.size();i++) {
+		for(MemberBean m:mbean) {
+			if(bean.getId().equals(m.getId())&&bean.getPass().equals(m.getPass())) {
+				bea=m;
+			}
+		}
+		/*for(int i=0;i<mbean.size();i++) {
 			if(bean.getId().equals(mbean.get(i).getId())) {
 				if(bean.getPass().equals(mbean.get(i).getPass()))
 					bool=true;
 					bea=mbean.get(i);
 			}
-		}
+		}*/
 /*		List<MemberBean> mbean=new MemberDAOImpl().selectMembers(id,pass);
 		for(int i=0;i<mbean.size();i++) {
 			if(id.equals(mbean.get(i).getId())) {
@@ -36,7 +40,7 @@ public class MemberServiceImpl implements MemberService{
 				bool=true;
 			}
 		}
-*/		System.out.println(bool);
+*/		System.out.println(bea);
 		return bea;
 	}
 

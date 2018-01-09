@@ -91,12 +91,11 @@ public class MemberDAOImpl implements MemberDAO{
 		System.out.println("DAOIMPL 진입");
 		List<MemberBean> list=new ArrayList<>();
 		MemberBean bea=null;
-		String sql="SELECT * FROM MEMBER";
 		try {
 			ResultSet rs=DriverManager.getConnection(
 					DBMS.ORACLE_CONECTIONURL,
 					DBMS.ORACLE_USERNAME,
-					DBMS.ORACLE_PASSWORD).createStatement().executeQuery(sql);
+					DBMS.ORACLE_PASSWORD).createStatement().executeQuery("SELECT * FROM MEMBER");
 			while(rs.next()) {
 				bea=new MemberBean();
 				System.out.println("id 받은 값 : "+rs.getString("id"));
