@@ -1,13 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"	pageEncoding="UTF-8"%>
-<!doctype html>
-<html lang="en">
-<head>
-	<meta charset="UTF-8" />
-	<title>예제종목</title>
-	<link rel="shortcut icon" href="${pageContext.request.contextPath}/resources/png/favicon.ico">
-	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/common.css">
-	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/index.css" /><!-- URL 링크 잡기. -->
-</head>
+<link rel="stylesheet" href="${css}/index.css" /><!-- URL 링크 잡기. -->
 <body>
 <div id="wrapper">
 <header id="index_header">
@@ -21,14 +13,14 @@
 			</tr>
 			<tr>
 				<td colspan="5">
-				<form id="auth_form" action="${pageContext.request.contextPath}/user/auth.do">
+				<form id="auth_form" action="${ctx}/user/auth.do">
 					<table id="index_login_box">
 						<tr>
-							<td><input id="index_input_id" name="id" type="text" placeholder="id" tabindex="1"/></td>
+							<td><input id="index_input_id" name="id" type="text" placeholder="id" tabindex="1" value="23"/></td>
 							<td rowspan="2"><button id="index_input_btn">로그인</button></td>
 						</tr>
 						<tr>
-							<td><input id="index_input_password" name="pass" type="password" placeholder="pass" tabindex="2"/></td>
+							<td><input id="index_input_password" name="pass" type="password" placeholder="pass" tabindex="2" value="23"/></td>
 						</tr>
 					</table>
 				</form>

@@ -11,7 +11,23 @@ import com.kabank.mvc.domain.MemberBean;
 import com.kabank.mvc.util.Enums;
 
 public class MemberDAOImpl implements MemberDAO{
-	List<MemberBean> list;
+	public static MemberDAOImpl getInstance() {
+		return new MemberDAOImpl();
+	}
+	private MemberDAOImpl() {//Thread single패턴
+		try {
+			Class.forName(DBMS.ORACLE_DRIVER);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+/*	private static MemberDAOImpl instance = new MemberDAOImpl();
+	public static MemberDAOImpl getInstance() {
+		return instance;
+	}
+	private MemberDAOImpl() {}
+*/	List<MemberBean> list;
 	Connection conn;
 	Statement stat;
 	ResultSet sel;
@@ -19,13 +35,13 @@ public class MemberDAOImpl implements MemberDAO{
 	public List<MemberBean> selectMembers(String id, String pass) {
 		list=new ArrayList<>();
 		try {
-			Class.forName(DBMS.ORACLE_DRIVER);
-			conn=DriverManager.getConnection(
+			sel=DriverManager.getConnection(
 					DBMS.ORACLE_CONECTIONURL,
 					DBMS.ORACLE_USERNAME,
-					DBMS.ORACLE_PASSWORD);
-			stat=conn.createStatement();
-			sel=stat.executeQuery(MemberSQL.MEMBERS);
+					DBMS.ORACLE_PASSWORD)
+				.createStatement()
+				.executeQuery(MemberSQL.MEMBERS)
+				;
 			MemberBean member = null;
 			while(sel.next()) {
 				member=new MemberBean();
@@ -44,48 +60,71 @@ public class MemberDAOImpl implements MemberDAO{
 	public void memberJoin(MemberBean bean) {
 		System.out.println("쿼리문 진입");
 		try {
-			Class.forName(DBMS.ORACLE_DRIVER);
-			Connection conn=DriverManager.getConnection(
+			DriverManager.getConnection(
 					DBMS.ORACLE_CONECTIONURL,
 					DBMS.ORACLE_USERNAME,
-					DBMS.ORACLE_PASSWORD);
-			stat=conn.createStatement();
-			String a=
-					String.format("%s %s %s("
-							+Enums.getEnu()+")"
-							+ " VALUES("
-							+Enums.getBlanks(Enums.MemberCalum.values().length)
-							+")",
-							Enums.DML.INSERT,
-							Enums.DML.INTO,
-							Enums.TABLE.MEMBER,
-							bean.getId(),
-							bean.getPass(),
-							bean.getName(),
-							bean.getSsn(),
-							bean.getPhone(),
-							bean.getEmail(),
-							bean.getProfile(),
-							bean.getAddr()
-							);
-			System.out.println(a);
-			stat.executeQuery(a);
+					DBMS.ORACLE_PASSWORD)
+			.createStatement()
+			.executeQuery(String.format("%s %s %s("
+					+Enums.getEnu()+")"
+					+ " VALUES("
+					+Enums.getBlanks(Enums.MemberCalum.values().length)
+					+")",
+					Enums.DML.INSERT,
+					Enums.DML.INTO,
+					Enums.TABLE.MEMBER,
+					bean.getId(),
+					bean.getPass(),
+					bean.getName(),
+					bean.getSsn(),
+					bean.getPhone(),
+					bean.getEmail(),
+					bean.getProfile(),
+					bean.getAddr()
+					));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
 
-	public MemberBean selectMemberById(MemberBean bean) {
+	public List<MemberBean> selectMemberById(MemberBean bean) {
+		System.out.println("DAOIMPL 진입");
+		List<MemberBean> list=new ArrayList<>();
+		MemberBean bea=null;
+		String sql="SELECT * FROM MEMBER";
+		try {
+			ResultSet rs=DriverManager.getConnection(
+					DBMS.ORACLE_CONECTIONURL,
+					DBMS.ORACLE_USERNAME,
+					DBMS.ORACLE_PASSWORD).createStatement().executeQuery(sql);
+			while(rs.next()) {
+				bea=new MemberBean();
+				System.out.println("id 받은 값 : "+rs.getString("id"));
+				System.out.println("pass 받은 값 : "+rs.getString("pass"));
+				bea.setId(rs.getString("id"));
+				bea.setPass(rs.getString("pass"));
+				bea.setName(rs.getString("name"));
+				bea.setSsn(rs.getString("ssn"));
+				bea.setPhone(rs.getString("phone"));
+				bea.setEmail(rs.getString("email"));
+				bea.setProfile(rs.getString("profile"));
+				bea.setAddr(rs.getString("addr"));
+				list.add(bea);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return list;
+	}
+/*	public MemberBean selectMemberById(MemberBean bean) {
 		System.out.println("DAOIMPL 진입");
 		MemberBean bea=null;
 		String sql="SELECT * FROM MEMBER WHERE id=? AND pass=?";
 		try {
-			Class.forName(DBMS.ORACLE_DRIVER);
-			Connection conn=DriverManager.getConnection(
+			PreparedStatement pstat=DriverManager.getConnection(
 					DBMS.ORACLE_CONECTIONURL,
 					DBMS.ORACLE_USERNAME,
-					DBMS.ORACLE_PASSWORD);
-			PreparedStatement pstat=conn.prepareStatement(sql);
+					DBMS.ORACLE_PASSWORD).prepareStatement(sql);
 			pstat.setString(1, bean.getId());
 			pstat.setString(2, bean.getPass());
 			ResultSet rs=pstat.executeQuery();
@@ -107,5 +146,5 @@ public class MemberDAOImpl implements MemberDAO{
 		}
 		return bea;
 	}
-	
+*/	
 }

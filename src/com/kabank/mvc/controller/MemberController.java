@@ -31,7 +31,7 @@ public class MemberController extends HttpServlet {
 				.split("/")[2]
 						.split(Path.DOT)[0]; 
 		MemberBean bean;
-		MemberService service=new MemberServiceImpl();
+		MemberService service=MemberServiceImpl.getInstance();
 		HttpSession session=request.getSession();
 		switch(path) {
 		case "auth":
