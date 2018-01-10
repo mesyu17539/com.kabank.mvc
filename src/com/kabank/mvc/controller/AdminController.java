@@ -7,7 +7,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.kabank.mvc.constants.Path;
+import com.kabank.mvc.enums.Path;
 import com.kabank.mvc.serviceImpl.AdminServiceImpl;
 
 @WebServlet({"/admin/main.do","/admin/create_table.do","/admin/member_list.do"})
@@ -15,7 +15,7 @@ public class AdminController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String dir=request.getServletPath().split("/")[1];
-		String path=request.getServletPath().split("/")[2].split(Path.DOT)[0];
+		String path=request.getServletPath().split("/")[2].split(".do")[0];
 		switch(path) {
 		case "main":
 			break;
@@ -27,7 +27,7 @@ public class AdminController extends HttpServlet {
 			break;
 		}
 		
-		request.getRequestDispatcher(Path.VIEW+dir+Path.SEPARATOR+path+Path.EXTENSION)
+		request.getRequestDispatcher(Path.VIEW.toString()+dir+Path.SEPARATOR.toString()+path+Path.EXTENSION)
 		.forward(request, response);
 		
 	}

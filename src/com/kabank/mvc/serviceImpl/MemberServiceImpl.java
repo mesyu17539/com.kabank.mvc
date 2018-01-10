@@ -5,6 +5,8 @@ import java.util.List;
 import com.kabank.mvc.dao.MemberDAO;
 import com.kabank.mvc.dao.impl.MemberDAOImpl;
 import com.kabank.mvc.domain.MemberBean;
+import com.kabank.mvc.enums.Vendor;
+import com.kabank.mvc.factory.DatabaseFactory;
 import com.kabank.mvc.service.MemberService;
 
 public class MemberServiceImpl implements MemberService{
@@ -18,14 +20,9 @@ public class MemberServiceImpl implements MemberService{
 	@Override
 	public MemberBean findById(MemberBean bean) {
 		System.out.println("ServiceIMPL 진입");
-		List<MemberBean> mbean=dao.selectMemberById(bean);
-		MemberBean bea=null;
+		MemberBean m=dao.selectMemberById(bean);
 		System.out.println("비교문");
-		for(MemberBean m:mbean) {
-			if(bean.getId().equals(m.getId())&&bean.getPass().equals(m.getPass())) {
-				bea=m;
-			}
-		}
+		
 		/*for(int i=0;i<mbean.size();i++) {
 			if(bean.getId().equals(mbean.get(i).getId())) {
 				if(bean.getPass().equals(mbean.get(i).getPass()))
@@ -40,8 +37,8 @@ public class MemberServiceImpl implements MemberService{
 				bool=true;
 			}
 		}
-*/		System.out.println(bea);
-		return bea;
+*/		System.out.println(dao.selectMemberById(bean));
+		return dao.selectMemberById(bean);
 	}
 
 	@Override

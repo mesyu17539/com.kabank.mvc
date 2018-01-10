@@ -43,4 +43,15 @@ public class Enums {
 		}
 		return blanks;
 	}
+	public static String getNBlanks(int count) {
+		String blanks="";
+		for(int i=0;i<count;i++) {
+			if(i==count-1) {
+				blanks += "%s";
+			}else {
+				blanks += "%s ";
+			}
+		}
+		return blanks;
+	}
 }

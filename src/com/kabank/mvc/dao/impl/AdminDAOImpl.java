@@ -4,22 +4,20 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.kabank.mvc.constants.AdminSql;
-import com.kabank.mvc.constants.DBMS;
 import com.kabank.mvc.dao.AdminDAO;
+import com.kabank.mvc.enums.DDLENUM;
+import com.kabank.mvc.enums.Vendor;
+import com.kabank.mvc.factory.DatabaseFactory;
 
 public class AdminDAOImpl implements AdminDAO{
 
 	@Override
 	public void createMembers(String tname) {
 		try {
-			Class.forName(DBMS.ORACLE_DRIVER);
-			Connection conn=DriverManager.getConnection(
-					DBMS.ORACLE_CONECTIONURL,
-					DBMS.ORACLE_USERNAME,
-					DBMS.ORACLE_PASSWORD);
-			Statement stat=conn.createStatement();
-			stat.executeQuery(AdminSql.CREATE_MEMBER(tname));
+			DatabaseFactory.createDatabase(Vendor.ORACLE)
+			.getConnection()
+			.createStatement()
+			.executeQuery(DDLENUM.CREATE_TABLE_MEMBER.toString());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -29,13 +27,10 @@ public class AdminDAOImpl implements AdminDAO{
 	public List<String> selectTable() {
 		List<String> list=new ArrayList<>();
 		try {
-			Class.forName(DBMS.ORACLE_DRIVER);
-			Connection conn=DriverManager.getConnection(
-					DBMS.ORACLE_CONECTIONURL,
-					DBMS.ORACLE_USERNAME,
-					DBMS.ORACLE_PASSWORD);
-			Statement stat=conn.createStatement();
-			ResultSet set=stat.executeQuery(AdminSql.SELECTOR_TNAME);
+			ResultSet set=DatabaseFactory.createDatabase(Vendor.ORACLE)
+			.getConnection()
+			.createStatement()
+			.executeQuery("SELECT * FROM tab");
 			while(set.next()) {
 				list.add(set.getString("TNAME"));
 			}

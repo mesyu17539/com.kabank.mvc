@@ -12,8 +12,8 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.catalina.tribes.membership.MemberImpl;
 
-import com.kabank.mvc.constants.Path;
 import com.kabank.mvc.domain.MemberBean;
+import com.kabank.mvc.enums.Path;
 import com.kabank.mvc.service.MemberService;
 import com.kabank.mvc.serviceImpl.MemberServiceImpl;
 import com.kabank.mvc.util.Enums;
@@ -24,15 +24,15 @@ public class MemberController extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		MemberService service=MemberServiceImpl.getInstance();
 		System.out.println("서블릿 내부===================================================");
 		/*response.getWriter().append("<h1>에휴</h1>").append(request.getContextPath());*/
+		HttpSession session=request.getSession();
+		MemberBean bean;
 		String dir=request.getServletPath().split("/")[1];
 		String path=request.getServletPath()
 				.split("/")[2]
-						.split(Path.DOT)[0]; 
-		MemberBean bean;
-		MemberService service=MemberServiceImpl.getInstance();
-		HttpSession session=request.getSession();
+						.split(".do")[0]; 
 		switch(path) {
 		case "auth":
 			bean=new MemberBean();
@@ -73,7 +73,7 @@ public class MemberController extends HttpServlet {
 			path="login";
 			break;
 		}
-		request.getRequestDispatcher(Path.VIEW+dir+Path.SEPARATOR+path+Path.EXTENSION)
+		request.getRequestDispatcher(Path.VIEW.toString()+dir+Path.SEPARATOR.toString()+path+Path.EXTENSION)
 		.forward(request, response);
 		
 		/*System.out.println("내가 찾는 것들"+path[2]);
