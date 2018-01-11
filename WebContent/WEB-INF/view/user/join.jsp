@@ -12,7 +12,7 @@
 </article>
 <article>
 	<div id="wrapper">
-		<form id="join_form" action="${pageContext.request.contextPath}/user/memberjoin.do">
+		<form id="join_form" action="${pageContext.request.contextPath}/user.do?cmd=memberjoin">
 		<table id="join_table">	
 			<tr>
 				<td>ID : </td>

@@ -9,6 +9,7 @@ import com.kabank.mvc.domain.MemberBean;
 import com.kabank.mvc.enums.DMLENUM;
 import com.kabank.mvc.enums.Vendor;
 import com.kabank.mvc.factory.DatabaseFactory;
+import com.kabank.mvc.factory.SqlFactory;
 import com.kabank.mvc.util.Enums;
 
 public class MemberDAOImpl implements MemberDAO{
@@ -34,23 +35,31 @@ public class MemberDAOImpl implements MemberDAO{
 	@Override
 	public List<MemberBean> selectMembers(String id, String pass) {
 		list=new ArrayList<>();
+		MemberBean member = null;
 		try {
+			/*new StringBuffer(DMLENUM.SELECT.toString())
+			.insert(7, Enums.getEnu().toString())
+			+Enums.TABLE.MEMBER.toString()*/
+			System.out.println("=====SlectById IN==============");
 			sel=DatabaseFactory.createDatabase(Vendor.ORACLE)
 					.getConnection()
 					.createStatement()
-					.executeQuery(new StringBuffer(DMLENUM.SELECT.toString()).insert(7, Enums.getEnu().toString())
-							+Enums.TABLE.MEMBER.toString())
+					.executeQuery(
+							new StringBuffer(DMLENUM.SELECT.toString())
+							.insert(7, Enums.getEnu().toString())
+							+Enums.TABLE.MEMBER.toString()
+							/*SqlFactory.create(6,DMLENUM.SELECT.toString()+Enums.getEnu().toString()+Enums.TABLE.MEMBER.toString())*/)
 					;
+			/*list=new ArrayList<>();
+			try {
+				sel=DatabaseFactory.createDatabase(Vendor.ORACLE)
+						.getConnection()
+						.createStatement()
+						.executeQuery(new StringBuffer(DMLENUM.SELECT.toString()).insert(7, Enums.getEnu().toString())
+								+Enums.TABLE.MEMBER.toString())
+						;*/
 			/*SELECT id, pass, name,ssn,phone, 
 			 * email,profile,addr FROM MEMBER*/
-			/*sel=DatabaseFactory.createDatabase(Vendor.ORACLE)
-					.getConnection()
-					.createStatement()
-					.execute(
-							new StringBuffer((String.valueOf(DMLENUM.SELECT))+(Enums.TABLE.MEMBER))
-							.insert(6," id, pass, name,ssn,phone,email,profile,addr ")
-							
-							);*/
 /*			sel=DriverManager.getConnection(
 					DBMS.ORACLE_CONECTIONURL,
 					DBMS.ORACLE_USERNAME,
@@ -58,7 +67,7 @@ public class MemberDAOImpl implements MemberDAO{
 					.createStatement()
 					.executeQuery(MemberSQL.MEMBERS)
 					;*/			
-			MemberBean member = null;
+			
 			while(sel.next()) {
 				member=new MemberBean();
 				member.setId(sel.getString("ID"));
@@ -68,6 +77,9 @@ public class MemberDAOImpl implements MemberDAO{
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		System.out.println("=====ID : "+member.getId());
+		System.out.println("=====pass : "+member.getPass());
+		System.out.println("============Select OUT=============");
 		System.out.println(list);
 		return list;
 	}

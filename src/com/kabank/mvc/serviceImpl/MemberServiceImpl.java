@@ -10,18 +10,15 @@ import com.kabank.mvc.factory.DatabaseFactory;
 import com.kabank.mvc.service.MemberService;
 
 public class MemberServiceImpl implements MemberService{
-	MemberDAO dao;
 	public static MemberServiceImpl getInstance() {
 		return new MemberServiceImpl();
 	}
-	private MemberServiceImpl() {
-		dao=MemberDAOImpl.getInstance();
-	}
+	private MemberServiceImpl() {}
 	@Override
 	public MemberBean findById(MemberBean bean) {
 		System.out.println("ServiceIMPL 진입");
-		MemberBean m=dao.selectMemberById(bean);
-		System.out.println("비교문");
+		System.out.println(MemberDAOImpl.getInstance().selectMemberById(bean));
+		return MemberDAOImpl.getInstance().selectMemberById(bean);
 		
 		/*for(int i=0;i<mbean.size();i++) {
 			if(bean.getId().equals(mbean.get(i).getId())) {
@@ -36,15 +33,13 @@ public class MemberServiceImpl implements MemberService{
 				if(pass.equals(mbean.get(i).getPass()))
 				bool=true;
 			}
-		}
-*/		System.out.println(dao.selectMemberById(bean));
-		return dao.selectMemberById(bean);
+		}*/		
 	}
 
 	@Override
 	public void join(MemberBean bean) {
 		System.out.println("서비스impl :\n"+bean);
-		dao.memberJoin(bean);
+		 MemberDAOImpl.getInstance().memberJoin(bean);
 	}
 
 }

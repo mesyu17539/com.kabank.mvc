@@ -1,6 +1,13 @@
 package com.kabank.mvc.enums;
 
 public enum Path {
+	AUTH{
+		@Override
+		public String toString() {
+			// TODO Auto-generated method stub
+			return "auth";
+		}
+	},
 	/*VIEW("/WEB-INF/view/"),
 	SEPARATOR("/"),
 	EXTENSION(".jsp"),

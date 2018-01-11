@@ -13,14 +13,18 @@
 			</tr>
 			<tr>
 				<td colspan="5">
-				<form id="auth_form" action="${ctx}/user/auth.do">
+				<form id="auth_form" action="${ctx}/user.do?cmd=auth&page=bitcamp">
 					<table id="index_login_box">
 						<tr>
 							<td><input id="index_input_id" name="id" type="text" placeholder="id" tabindex="1" value="23"/></td>
 							<td rowspan="2"><button id="index_input_btn">로그인</button></td>
 						</tr>
 						<tr>
-							<td><input id="index_input_password" name="pass" type="password" placeholder="pass" tabindex="2" value="23"/></td>
+							<td><input id="index_input_password" name="pass" type="password" placeholder="pass" tabindex="2" value="23"/>
+							<input type="hidden" name="cmd" value="login" />
+							<input type="hidden" name="dir" value="bitcamp" />
+							<input type="hidden" name="page" value="main" />
+							</td>
 						</tr>
 					</table>
 				</form>
@@ -43,8 +47,8 @@
 </body>
 <script>
 document.querySelector('#go_join_link').addEventListener("click",function () {
-	alert("짜란");
-	location.href="${pageContext.request.contextPath}/user/join_form.do"
+	alert("회원가입");
+	location.href="${pageContext.request.contextPath}/user.do?cmd=move&page=join"
 },false);
 document.querySelector('#go_JDBC_link').addEventListener("click",function(){
 	alert("JDBC");
