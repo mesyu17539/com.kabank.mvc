@@ -4,10 +4,23 @@ import com.kabank.mvc.enums.Action;
 
 public class Command implements Order{
 	protected String dir, page, search,colum;
+	public String getSearch() {
+		return search;
+	}
+
+	public void setSearch(String search) {
+		this.search = search;
+	}
+
 	protected Action action;
 	
 	@Override
 	public String execute() {
+		System.out.println("command 경로 조합 : "+Action.VIEW.toString()
+				+dir
+				+Action.SEPARATOR
+				+page
+				+Action.EXTENSION);
 		return Action.VIEW.toString()
 				+dir
 				+Action.SEPARATOR

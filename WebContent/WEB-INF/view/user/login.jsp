@@ -13,7 +13,7 @@
 			</tr>
 			<tr>
 				<td colspan="5">
-				<form id="auth_form" action="${ctx}/user.do?cmd=auth&page=bitcamp">
+				<form id="auth_form" action="${ctx}/user.do?cmd=LOGIN&&page=bitcamp">
 					<table id="index_login_box">
 						<tr>
 							<td><input id="index_input_id" name="id" type="text" placeholder="id" tabindex="1" value="23"/></td>

@@ -41,6 +41,7 @@ public class MemberController extends HttpServlet {
 				/*page=request.getParameter("page");*/
 		/*Action action=ActionFactory.create(request.getParameter("cmd"));*/
 		/*Command cmd=CommandFactory.create(dir, page, action);*/
+		System.out.println("switch문 Action : "+InitCommand.cmd.getAction());
 		switch(InitCommand.cmd.getAction()) {
 		case MOVE:
 			System.out.println("=========Member: Move=============");
@@ -95,11 +96,15 @@ public class MemberController extends HttpServlet {
 			MemberBean result=null;
 			result=service.findById(bean);
 			if(result==null) {
+				System.out.println("null이냐");
 				InitCommand.cmd.setDir("user");
 				InitCommand.cmd.setPage("login");
 				InitCommand.cmd.execute();
 				DispatcherServlet.send(request, response);
 			}else {
+				System.out.println("null 아니냐");
+				InitCommand.cmd.setDir("bitcamp");
+				session.setAttribute("user", result);
 				DispatcherServlet.send(request, response);
 			}
 			System.out.println("=========Member: Login OUT=============");

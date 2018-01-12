@@ -8,6 +8,7 @@ public class SearchCommand  extends Command{
 		setDir(dir);
 		setPage(page);
 		setAction(action);
+		setSearch(search);
 		setColum(colum);
 		execute();
 	}
