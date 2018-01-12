@@ -2,32 +2,34 @@ package com.kabank.mvc.command;
 
 import com.kabank.mvc.enums.Action;
 
-public class Command implements Order{
-	protected String dir, page, search,colum;
-	public String getSearch() {
-		return search;
-	}
-
-	public void setSearch(String search) {
-		this.search = search;
-	}
-
+public class Command{
+	protected String cmd, dir, page, view, data, colum;//colum:DB의 metadata
 	protected Action action;
 	
-	@Override
-	public String execute() {
-		System.out.println("command 경로 조합 : "+Action.VIEW.toString()
-				+dir
-				+Action.SEPARATOR
-				+page
-				+Action.EXTENSION);
-		return Action.VIEW.toString()
-				+dir
-				+Action.SEPARATOR
-				+page
-				+Action.EXTENSION;
+	public String getCmd() {
+		return cmd;
 	}
-	
+
+	public void setCmd(String cmd) {
+		this.cmd = cmd;
+	}
+
+	public String getView() {
+		return view;
+	}
+
+	public void setView(String view) {
+		this.view = view;
+	}
+
+	public String getData() {
+		return data;
+	}
+
+	public void setData(String data) {
+		this.data = data;
+	}
+
 	public String getColum() {
 		return colum;
 	}

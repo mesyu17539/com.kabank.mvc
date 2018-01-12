@@ -4,6 +4,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.kabank.mvc.command.InitCommand;
 import com.kabank.mvc.dao.MemberDAO;
 import com.kabank.mvc.domain.MemberBean;
 import com.kabank.mvc.enums.DMLENUM;
@@ -11,6 +12,7 @@ import com.kabank.mvc.enums.Vendor;
 import com.kabank.mvc.factory.DatabaseFactory;
 import com.kabank.mvc.factory.SqlFactory;
 import com.kabank.mvc.util.Enums;
+import com.kabank.mvc.util.MemberEnum;
 
 public class MemberDAOImpl implements MemberDAO{
 	public static MemberDAOImpl getInstance() {
@@ -41,7 +43,7 @@ public class MemberDAOImpl implements MemberDAO{
 			.insert(7, Enums.getEnu().toString())
 			+Enums.TABLE.MEMBER.toString()*/
 			System.out.println("=====SlectById IN==============");
-			sel=DatabaseFactory.createDatabase(Vendor.ORACLE)
+			sel=DatabaseFactory.create(Vendor.ORACLE)
 					.getConnection()
 					.createStatement()
 					.executeQuery(
@@ -88,7 +90,7 @@ public class MemberDAOImpl implements MemberDAO{
 	public void memberJoin(MemberBean bean) {
 		System.out.println("쿼리문 진입");
 		try {
-			DatabaseFactory.createDatabase(Vendor.ORACLE)
+			DatabaseFactory.create(Vendor.ORACLE)
 				.getConnection()
 				.createStatement()
 				.executeUpdate(String.format("%s %s %s("
@@ -143,7 +145,7 @@ public class MemberDAOImpl implements MemberDAO{
 		System.out.println("DAOIMPL 진입");
 		MemberBean bea=null;
 		try {
-			ResultSet rs=DatabaseFactory.createDatabase(Vendor.ORACLE)
+			ResultSet rs=DatabaseFactory.create(Vendor.ORACLE)
 					.getConnection()
 					.createStatement()
 					.executeQuery(
@@ -225,5 +227,34 @@ public class MemberDAOImpl implements MemberDAO{
 		}
 		return bea;
 	}
-*/	
+*/
+	@Override
+	public MemberBean login() {
+		System.out.println("===MEMBER.D: LOGIN IN===");
+		StringBuffer sql=new StringBuffer(MemberEnum.LOGIN.toString());
+		String[] arr=InitCommand.cmd.getData().split("/");
+		System.out.println("ID : "+arr[0]);
+		System.out.println("pass : "+arr[1]);
+		sql.replace(sql.indexOf("$"), sql.indexOf("$")+1, arr[0]);
+		sql.replace(sql.indexOf("@"), sql.indexOf("@")+1, arr[1]);
+		System.out.println("::SQL::"+sql.toString());
+		MemberBean member=null;
+		try {
+			ResultSet rs=DatabaseFactory.create(Vendor.ORACLE).getConnection().createStatement().executeQuery(sql.toString());
+			while(rs.next()) {
+				member =new MemberBean();
+				member.setId(rs.getString(MemberEnum.ID.toString()));
+				member.setPass(rs.getString(MemberEnum.PASS.toString()));
+				member.setName(rs.getString(MemberEnum.NAME.toString()));
+				member.setEmail(rs.getString(MemberEnum.EMAIL.toString()));
+				member.setAddr(rs.getString(MemberEnum.ADDR.toString()));
+				member.setPhone(rs.getString(MemberEnum.PHONE.toString()));
+				member.setSsn(rs.getString(MemberEnum.SSN.toString()));
+				member.setProfile(rs.getString(MemberEnum.PROFILE.toString()));
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		return member;
+	}	
 }

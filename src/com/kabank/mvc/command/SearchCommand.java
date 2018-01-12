@@ -1,15 +1,25 @@
 package com.kabank.mvc.command;
 
-import com.kabank.mvc.enums.Action;
+import java.util.Map;
 
-public class SearchCommand  extends Command{
-	public SearchCommand(String dir, String page, Action action, String search, String colum) {
+import javax.servlet.http.HttpServletRequest;
+
+import com.kabank.mvc.Iterator.ParamIterator;
+
+public class SearchCommand  implements IOrder{
+	Map<?,?> map;
+	public SearchCommand(HttpServletRequest request) {
 		// TODO Auto-generated constructor stub
-		setDir(dir);
-		setPage(page);
-		setAction(action);
-		setSearch(search);
-		setColum(colum);
-		execute();
+		map=ParamIterator.execute(request);
+	}
+
+	@Override
+	public void execute() {
+		// TODO Auto-generated method stub
+		String id=String.valueOf(map.get("id"));//id는 login jsp 의 name:id.
+		String pass=String.valueOf(map.get("pass"));//pass는 login jsp 의 name:pass.
+		System.out.println("서치 id : "+id+pass);
+		InitCommand.cmd.setColum("id/pass");
+		InitCommand.cmd.setData(id+"/"+pass);
 	}
 }

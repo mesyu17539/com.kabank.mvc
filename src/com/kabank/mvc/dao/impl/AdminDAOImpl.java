@@ -14,7 +14,7 @@ public class AdminDAOImpl implements AdminDAO{
 	@Override
 	public void createMembers(String tname) {
 		try {
-			DatabaseFactory.createDatabase(Vendor.ORACLE)
+			DatabaseFactory.create(Vendor.ORACLE)
 			.getConnection()
 			.createStatement()
 			.executeQuery(DDLENUM.CREATE_TABLE_MEMBER.toString());
@@ -27,7 +27,7 @@ public class AdminDAOImpl implements AdminDAO{
 	public List<String> selectTable() {
 		List<String> list=new ArrayList<>();
 		try {
-			ResultSet set=DatabaseFactory.createDatabase(Vendor.ORACLE)
+			ResultSet set=DatabaseFactory.create(Vendor.ORACLE)
 			.getConnection()
 			.createStatement()
 			.executeQuery("SELECT * FROM tab");

@@ -14,7 +14,7 @@ public class DispatcherServlet {
 			HttpServletRequest request, HttpServletResponse response/*, Command cmd*/)
 				throws ServletException, IOException {//여기서 Instance를 죽이지 않는다
 		request
-		.getRequestDispatcher(InitCommand.cmd.execute()/*cmd.execute()*/)
+		.getRequestDispatcher(InitCommand.cmd.getView()/*cmd.execute()*/)
 		.forward(request, response);
 	}
 }

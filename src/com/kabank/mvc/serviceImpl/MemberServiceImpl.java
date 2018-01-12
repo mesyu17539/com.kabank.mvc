@@ -41,5 +41,10 @@ public class MemberServiceImpl implements MemberService{
 		System.out.println("서비스impl :\n"+bean);
 		 MemberDAOImpl.getInstance().memberJoin(bean);
 	}
+	@Override
+	public MemberBean login() {
+		// TODO Auto-generated method stub
+		return MemberDAOImpl.getInstance().login();
+	}
 
 }

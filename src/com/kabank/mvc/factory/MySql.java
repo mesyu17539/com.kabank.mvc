@@ -2,7 +2,7 @@ package com.kabank.mvc.factory;
 
 import java.sql.Connection;
 
-public class MySql implements Database{
+public class MySql implements IDatabase{
 	private Connection conn;
 	private String driver,url,id,pw;
 	

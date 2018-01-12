@@ -88,6 +88,7 @@
 		<th colspan="4"></th>
 	</tr>
 </table>
+<button id="bitcam_passbtn">비밀번호 변경</button>
 <input type="hidden" id="id" value="tkddn"/>
 </form>
 </div>

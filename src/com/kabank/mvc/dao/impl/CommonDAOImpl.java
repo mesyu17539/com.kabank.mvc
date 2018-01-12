@@ -14,7 +14,7 @@ public class CommonDAOImpl implements CommonDAO {
 	public String selectTableCount() {
 		String count="";
 		try {
-			ResultSet sel=DatabaseFactory.createDatabase(Vendor.ORACLE)
+			ResultSet sel=DatabaseFactory.create(Vendor.ORACLE)
 			.getConnection()
 			.createStatement()
 			.executeQuery(DMLENUM.COUNT.toString()+TNameEnum.MEMBER);
