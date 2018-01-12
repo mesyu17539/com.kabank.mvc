@@ -11,7 +11,7 @@
 	</aside>
 <section id="bitc_section">
 <div id="wrapper">
-<form action="result.jsp" id="bit_form">
+<form action="${pageContext.request.contextPath}/user.do?cmd=move&dir=bitcamp&page=main" id="bit_form">
 <table id="bitca_table">
 	<tr>
 		<th rowspan="4" class="shema"><img src="${pageContext.request.contextPath}/resources/png/profile.png" alt="" /></th>
@@ -88,10 +88,19 @@
 		<th colspan="4"></th>
 	</tr>
 </table>
-<button id="bitcam_passbtn">비밀번호 변경</button>
-<input type="hidden" id="id" value="tkddn"/>
 </form>
+<button id="bitcam_passbtn">비밀번호 변경</button>
 </div>
 </section>
 </body>
+<script>
+document.querySelector('#bitcam_passbtn').addEventListener("click",function () {
+	alert("비밀번호 변경 클릭");
+	location.href="${pageContext.request.contextPath}/user.do?cmd=move&dir=bitcamp&page=changePath"
+},false);
+document.querySelector('#bitcam_btn').addEventListener("click",function(){
+	alert("추울력");
+	document.querySelector('#bit_form').submit();
+},false)
+</script>
 </html>

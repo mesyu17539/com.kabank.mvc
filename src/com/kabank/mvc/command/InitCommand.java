@@ -18,10 +18,14 @@ public class InitCommand implements IOrder{
 	@Override
 	public void execute() {
 		String o= String.valueOf(map.get("cmd"));
+		System.out.println("O는?"+ o);
 		if(o.equals("null")) {
 			cmd.setAction(ActionFactory.create("move"));
+		}else{
+			System.out.println("와따");
+			cmd.setAction(ActionFactory.create(o));
 		}
-		cmd.setAction(ActionFactory.create(o));
+		System.out.println("액숀"+cmd.getAction());
 	}
 	
 }

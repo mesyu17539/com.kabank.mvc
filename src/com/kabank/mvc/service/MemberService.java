@@ -6,4 +6,5 @@ public interface MemberService {
 	public MemberBean findById(MemberBean bean);
 	public void join(MemberBean bean);
 	public MemberBean login();
+	public void chage();
 }

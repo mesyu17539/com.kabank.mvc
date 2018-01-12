@@ -46,5 +46,10 @@ public class MemberServiceImpl implements MemberService{
 		// TODO Auto-generated method stub
 		return MemberDAOImpl.getInstance().login();
 	}
+	@Override
+	public void chage() {
+		// TODO Auto-generated method stub
+		 MemberDAOImpl.getInstance().chagePass();
+	}
 
 }

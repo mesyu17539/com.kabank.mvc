@@ -48,14 +48,31 @@ public class MemberController extends HttpServlet {
 		switch(InitCommand.cmd.getAction()) {
 		case MOVE:
 			System.out.println("=========Member: Move=============");
-			new MoveCommand(request).execute();
 			System.out.println("=========Member: Move OUT=============");
-			System.out.println("=========Member: Move OUT=============");
-			DispatcherServlet.send(request, response);break;
+			move(request, response);break;
 			/*case MOVE:DispatcherServlet.send(request, response, cmd);*/			
 			/*path=request.getParameter("page");
 			System.out.printf("경로 %s page %s\n",dir,path);*/
 			/*break;*/
+		case CHANGE:
+			System.out.println("=========CANGE: Login IN=============");
+			MemberBean m=(MemberBean) session.getAttribute("user");
+			System.out.println("빈이다"+m.getId()+m.getPass());
+			new SearchCommand(request).execute();
+			MemberBean memr=MemberServiceImpl.getInstance().login();
+			if(memr==null) {
+				InitCommand.cmd.setDir("user");
+				InitCommand.cmd.setPage("login");
+			}else {
+				session.setAttribute("user", memr);
+				InitCommand.cmd.setDir("bitcamp");
+				InitCommand.cmd.setPage("main");
+			}
+			new MoveCommand(request).execute();
+			System.out.println(InitCommand.cmd.getView());
+			System.out.println("=========CANGE: Login OUT=============");
+			DispatcherServlet.send(request, response);
+			break;
 		case JOIN:
 			System.out.println("=========Member: JOIN=============");
 			bean=new MemberBean();
@@ -92,7 +109,7 @@ public class MemberController extends HttpServlet {
 			System.out.println("ADD OUT");
 			break;
 		case LOGIN:
-			login(request, response);
+			login(request, response,session);
 			
 			/*String id=request.getParameter("id");
 			String pass=request.getParameter("pass");
@@ -125,14 +142,20 @@ public class MemberController extends HttpServlet {
 		
 	}
 
-	private void login(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	private void move(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		new MoveCommand(request).execute();
+		DispatcherServlet.send(request, response);
+	}
+
+	private void login(HttpServletRequest request, HttpServletResponse response, HttpSession session) throws ServletException, IOException {
 		System.out.println("=========Member: Login IN=============");
 		new SearchCommand(request).execute();
-		if(MemberServiceImpl.getInstance().login()==null) {
+		MemberBean memr=MemberServiceImpl.getInstance().login();
+		if(memr==null) {
 			InitCommand.cmd.setDir("user");
 			InitCommand.cmd.setPage("login");
 		}else {
-			/*session.setAttribute("user", result);*/
+			session.setAttribute("user", memr);
 			InitCommand.cmd.setDir("bitcamp");
 			InitCommand.cmd.setPage("main");
 		}

@@ -256,5 +256,9 @@ public class MemberDAOImpl implements MemberDAO{
 			// TODO: handle exception
 		}
 		return member;
+	}
+	public void chagePass() {
+		// TODO Auto-generated method stub
+		
 	}	
 }
